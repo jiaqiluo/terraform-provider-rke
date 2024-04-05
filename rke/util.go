@@ -77,6 +77,22 @@ func toArrayInterface(in []string) []interface{} {
 	return out
 }
 
+func toArrayMapInterface(in []map[string]string) []map[string]interface{} {
+	out := make([]map[string]interface{}, len(in))
+	for i, v := range in {
+		out[i] = toMapInterface(v)
+	}
+	return out
+}
+
+func toArrayMapString(in []map[string]interface{}) []map[string]string {
+	out := make([]map[string]string, len(in))
+	for i, v := range in {
+		out[i] = toMapString(v)
+	}
+	return out
+}
+
 func toMapString(in map[string]interface{}) map[string]string {
 	out := make(map[string]string)
 	for i, v := range in {

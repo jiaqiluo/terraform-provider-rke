@@ -20,6 +20,7 @@ func flattenRKEClusterSystemImages(in rancher.RKESystemImages) []interface{} {
 	obj["kube_dns_autoscaler"] = in.KubeDNSAutoscaler
 	obj["coredns"] = in.CoreDNS
 	obj["coredns_autoscaler"] = in.CoreDNSAutoscaler
+	obj["nodelocal"] = in.Nodelocal
 	obj["kubernetes"] = in.Kubernetes
 	obj["flannel"] = in.Flannel
 	obj["flannel_cni"] = in.FlannelCNI
@@ -30,6 +31,7 @@ func flattenRKEClusterSystemImages(in rancher.RKESystemImages) []interface{} {
 	obj["calico_flex_vol"] = in.CalicoFlexVol
 	obj["canal_node"] = in.CanalNode
 	obj["canal_cni"] = in.CanalCNI
+	obj["canal_controllers"] = in.CanalControllers
 	obj["canal_flannel"] = in.CanalFlannel
 	obj["canal_flex_vol"] = in.CanalFlexVol
 	obj["weave_node"] = in.WeaveNode
@@ -37,16 +39,17 @@ func flattenRKEClusterSystemImages(in rancher.RKESystemImages) []interface{} {
 	obj["pod_infra_container"] = in.PodInfraContainer
 	obj["ingress"] = in.Ingress
 	obj["ingress_backend"] = in.IngressBackend
+	obj["ingress_webhook"] = in.IngressWebhook
 	obj["metrics_server"] = in.MetricsServer
 	obj["windows_pod_infra_container"] = in.WindowsPodInfraContainer
-	obj["nodelocal"] = in.Nodelocal
 	obj["aci_cni_deploy_container"] = in.AciCniDeployContainer
 	obj["aci_host_container"] = in.AciHostContainer
 	obj["aci_opflex_container"] = in.AciOpflexContainer
 	obj["aci_mcast_container"] = in.AciMcastContainer
 	obj["aci_ovs_container"] = in.AciOpenvSwitchContainer
 	obj["aci_controller_container"] = in.AciControllerContainer
-
+	obj["aci_gbp_server_container"] = in.AciGbpServerContainer
+	obj["aci_opflex_server_container"] = in.AciOpflexServerContainer
 	return []interface{}{obj}
 }
 
@@ -103,6 +106,10 @@ func expandRKEClusterSystemImages(p []interface{}) rancher.RKESystemImages {
 		obj.CoreDNSAutoscaler = v
 	}
 
+	if v, ok := in["nodelocal"].(string); ok && len(v) > 0 {
+		obj.Nodelocal = v
+	}
+
 	if v, ok := in["kubernetes"].(string); ok && len(v) > 0 {
 		obj.Kubernetes = v
 	}
@@ -143,6 +150,9 @@ func expandRKEClusterSystemImages(p []interface{}) rancher.RKESystemImages {
 		obj.CanalCNI = v
 	}
 
+	if v, ok := in["canal_controllers"].(string); ok && len(v) > 0 {
+		obj.CanalControllers = v
+	}
 	if v, ok := in["canal_flannel"].(string); ok && len(v) > 0 {
 		obj.CanalFlannel = v
 	}
@@ -171,16 +181,16 @@ func expandRKEClusterSystemImages(p []interface{}) rancher.RKESystemImages {
 		obj.IngressBackend = v
 	}
 
+	if v, ok := in["ingress_webhook"].(string); ok && len(v) > 0 {
+		obj.IngressWebhook = v
+	}
+
 	if v, ok := in["metrics_server"].(string); ok && len(v) > 0 {
 		obj.MetricsServer = v
 	}
 
 	if v, ok := in["windows_pod_infra_container"].(string); ok && len(v) > 0 {
 		obj.WindowsPodInfraContainer = v
-	}
-
-	if v, ok := in["nodelocal"].(string); ok && len(v) > 0 {
-		obj.Nodelocal = v
 	}
 
 	if v, ok := in["aci_cni_deploy_container"].(string); ok && len(v) > 0 {
@@ -205,6 +215,14 @@ func expandRKEClusterSystemImages(p []interface{}) rancher.RKESystemImages {
 
 	if v, ok := in["aci_controller_container"].(string); ok && len(v) > 0 {
 		obj.AciControllerContainer = v
+	}
+
+	if v, ok := in["aci_gbp_server_container"].(string); ok && len(v) > 0 {
+		obj.AciGbpServerContainer = v
+	}
+
+	if v, ok := in["aci_opflex_server_container"].(string); ok && len(v) > 0 {
+		obj.AciOpflexServerContainer = v
 	}
 
 	return obj

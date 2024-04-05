@@ -4,7 +4,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-//Schemas
+// Schemas
 
 func rkeClusterSystemImagesFields() map[string]*schema.Schema {
 	s := map[string]*schema.Schema{
@@ -96,6 +96,10 @@ func rkeClusterSystemImagesFields() map[string]*schema.Schema {
 			Type:     schema.TypeString,
 			Optional: true,
 		},
+		"canal_controllers": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
 		"canal_flannel": {
 			Type:     schema.TypeString,
 			Optional: true,
@@ -121,6 +125,10 @@ func rkeClusterSystemImagesFields() map[string]*schema.Schema {
 			Optional: true,
 		},
 		"ingress_backend": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"ingress_webhook": {
 			Type:     schema.TypeString,
 			Optional: true,
 		},
@@ -153,6 +161,14 @@ func rkeClusterSystemImagesFields() map[string]*schema.Schema {
 			Optional: true,
 		},
 		"aci_controller_container": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"aci_gbp_server_container": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"aci_opflex_server_container": {
 			Type:     schema.TypeString,
 			Optional: true,
 		},

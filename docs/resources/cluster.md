@@ -769,6 +769,7 @@ The following attributes are exported:
 * `calico_flex_vol` - (Optional) Docker image for calico_flex_vol (string)
 * `canal_node` - (Optional) Docker image for canal_node (string)
 * `canal_cni` - (Optional) Docker image for canal_cni (string)
+* `canal_controllers` - (Optional) Docker image for canal_controllers (string)
 * `canal_flannel` - (Optional) Docker image for canal_flannel (string)
 * `canal_flex_vol` - (Optional) Docker image for canal_flex_vol (string)
 * `weave_node` - (Optional) Docker image for weave_node (string)
@@ -776,6 +777,7 @@ The following attributes are exported:
 * `pod_infra_container` - (Optional) Docker image for pod_infra_container (string)
 * `ingress` - (Optional) Docker image for ingress (string)
 * `ingress_backend` - (Optional) Docker image for ingress_backend (string)
+* `ingress_webhook` - (Optional) Docker image for ingress_webhook (string)
 * `metrics_server` - (Optional) Docker image for metrics_server (string)
 * `windows_pod_infra_container` - (Optional) Docker image for windows_pod_infra_container (string)
 * `aci_cni_deploy_container` - (Optional) Docker image for aci_cni_deploy_container (string)
@@ -784,6 +786,8 @@ The following attributes are exported:
 * `aci_mcast_container` - (Optional) Docker image for aci_mcast_container (string)
 * `aci_ovs_container` - (Optional) Docker image for aci_ovs_container (string)
 * `aci_controller_container` - (Optional) Docker image for aci_controller_container (string)
+* `aci_gbp_server_container` - (Optional) Docker image for aci_gbp_server_container (string)
+* `aci_opflex_server_container` - (Optional) Docker image for aci_opflex_server_container (string)
 
 ### `upgrade_strategy`
 

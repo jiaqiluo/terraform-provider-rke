@@ -188,6 +188,12 @@ func flattenRKECluster(d *schema.ResourceData, in *cluster.Cluster) error {
 			return err
 		}
 	}
+	if _, ok := d.Get("RotateEncryptionKey").(bool); ok {
+		d.Set("RotateEncryptionKey", in.RancherKubernetesEngineConfig.RotateEncryptionKey)
+	}
+	if v, ok := d.Get("win_prefix_path").(string); ok && len(v) > 0 && len(in.WindowsPrefixPath) > 0 {
+		d.Set("win_prefix_path", in.WindowsPrefixPath)
+	}
 
 	// computed values
 	d.Set("api_server_url", "") // nolint
@@ -339,6 +345,14 @@ func expandRKECluster(in *schema.ResourceData) (string, *rancher.RancherKubernet
 
 	if v, ok := in.Get("ssh_agent_auth").(bool); ok && v {
 		obj.SSHAgentAuth = v
+	}
+
+	if v, ok := in.Get("rotate_encryption_key").(bool); ok && v {
+		obj.RotateEncryptionKey = v
+	}
+
+	if v, ok := in.Get("win_prefix_path").(string); ok && len(v) > 0 {
+		obj.WindowsPrefixPath = v
 	}
 
 	if v, ok := in.Get("ssh_cert_path").(string); ok && len(v) > 0 {
